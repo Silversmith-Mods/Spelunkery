@@ -16,15 +16,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(IceBlock.class)
 public abstract class IceMixin {
-
-    public void melt(BlockState state, Level level, BlockPos pos) {
-        if (level.dimensionType().ultraWarm()) {
-            level.removeBlock(pos, false);
-        } else {
-            level.setBlockAndUpdate(pos, Blocks.WATER.defaultBlockState());
-            level.neighborChanged(pos, Blocks.WATER, pos);
-        }
-    }
+    @Shadow
+    protected abstract void melt(BlockState state, Level level, BlockPos pos);
 
     @Inject(method = "randomTick", at = @At("HEAD"))
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random, CallbackInfo ci) {

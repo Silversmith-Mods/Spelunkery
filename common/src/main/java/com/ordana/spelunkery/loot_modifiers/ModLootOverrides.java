@@ -399,9 +399,11 @@ public class ModLootOverrides extends DynamicServerResourceProvider {
                     "overrides/loot_table/", ResType.BLOCK_LOOT_TABLES));
 
             //override spelunkery loot tables to make m'ores metal ores drop raw nuggets
-            executor.accept(overrideDataFile( spelunkeryLootMetal,
-                    "spelunkery", "",
-                    "overrides/loot_table/", ResType.BLOCK_LOOT_TABLES));
+            if (CommonConfigs.ENABLE_RAW_NUGGETS.get()) {
+                executor.accept(overrideDataFile( spelunkeryLootMetal,
+                        "spelunkery", "",
+                        "overrides/loot_table/", ResType.BLOCK_LOOT_TABLES));
+            }
 
             if (PlatHelper.isModLoaded("oreganized")) {
 
